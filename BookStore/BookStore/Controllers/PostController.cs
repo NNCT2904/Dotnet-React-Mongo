@@ -25,6 +25,7 @@ namespace BookStore.Controllers
         public ActionResult Check() => Ok("API ok!");
 
         [AllowAnonymous]
+        [HttpGet("api/posts/")]
         public ActionResult<IList<Post>> Index() => _postSvc.Read().ToList();
 
         [HttpPost("api/posts/create")]
