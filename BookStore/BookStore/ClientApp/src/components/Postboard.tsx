@@ -2,34 +2,22 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import {ApplicationState} from '../store';
 import * as PostboardStore from '../store/Postboard';
+import FetchData from './FetchData';
 
 type PostboardProps = PostboardStore.PostboardState 
     & typeof PostboardStore.actionCreators;
 
-class Postboard extends React.PureComponent<PostboardProps> {
-    public componentDidMount() {
-        this.ensureDataFetched();
-        console.log(this.props.posts);
-    }
-
-    private ensureDataFetched() {
-        this.props.requestPosts();
-    }
-
-    private renderPosts() {
-
-    }
-
-    public render() {
-        return (
-            <React.Fragment>
-                <h1>Posts</h1>
-                
-            </React.Fragment>
-        )
-    }
+const Postboard = (props:PostboardProps) => {
+    return (
+         <React.Fragment>
+            <h1>Posts</h1> 
+            <p>Anyway, check swagger</p>
+            {console.log("Posts: "+props.posts)}
+        </React.Fragment>
+    )
 }
 
-
-
-export default Postboard;
+export default connect(
+    (state: ApplicationState) => state.postBoard,
+    PostboardStore.actionCreators
+)(Postboard as any);
